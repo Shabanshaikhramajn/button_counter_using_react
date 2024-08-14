@@ -1,24 +1,28 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+
+
 import './App.css'
+
+
 
 function App() {
 
-
+//  letting cosnt define
   let [counter,setCounter] = useState(15)
 
-  
+  const [progress, setProgress] = useState(0);
 
   const addValue =() =>{
-    setCounter(prevcounter => prevcounter+1)
-    setCounter(prevcounter => prevcounter+1)
     
-   
 
-   
+    // adding the counter --------------------------------------------
+
+    if(counter <150){
+    setCounter(prevcounter => prevcounter+1)
+    }
+    
   }
-
+ //removing the counter --------------------------------------------------
 
   const removeValue = ()  =>{
    
@@ -27,15 +31,66 @@ function App() {
     }
   }
 
+
+    //handle button click ------------------------------------------------
+
+  const handleButtonClick = ()=>{
+    if(progress <150){
+        setProgress(progress +1);
+    }
+}
+
+//handle button reset -------------------------------------------------
+
+const handleButtonReset =()=>{
+  if(progress >0){
+  setProgress(progress -1);
+  }}
+
+
+
+const getColor =()=>{
+if(progress <40){
+    return "#747bff";
+}else if(progress <70){
+    return "#ffa500"
+}else  {
+    return "#2ecc71";
+}
+
+}
+
   return (
     <>
-     <h1>chai aur react</h1>
-     <h2>counter value {counter}</h2>
-     <button onClick={addValue}>add value</button>
+    {/* progress bar start */}
+
+
+    <div className="container">
+<div className="progress-bar">
+    <div className="progress-bar-fill"
+     style ={{width:`${progress}%`, backgroundColor:getColor()}}  >
+        {" "}
+     </div>
+
+</div>
+
+<div  className="progress-label">{progress}</div>
+{/* <button onClick={handleButtonClick}>undo</button>
+<button onClick={handleButtonReset} >redo</button> */}
+
+</div>
+{/* progress bar end */}
+
+
+
+
+     <h2>Number increament/decreament</h2>
+     {/* <h2>Number value : {counter}</h2> */}
+     <button  onClick={handleButtonClick} >add value</button>
      <br/>
      <button
-     onClick={removeValue}>remove value {counter}</button>
-     <p>footer:{counter}</p>
+    onClick={handleButtonReset}>remove value </button>
+    
     </>
   )
 }
